@@ -70,15 +70,18 @@ export function FeaturesSection() {
   );
 }
 
-export function TestimonialsSection() {
+export function TestimonialsSection({ extraFeedbacks = [] }) {
+  const [showAll, setShowAll] = React.useState(false);
   const reviews = [
     { name: "Fatima Z.", city: "Casablanca", rating: 5, text: "Le Rice Toner a complètement transformé ma peau en 2 semaines. Mon teint est plus lumineux et mes pores sont minimisés. Je ne peux plus m'en passer !", product: "Rice Toner" },
     { name: "Amira K.", city: "Rabat", rating: 5, text: "Le Rice Cream est absolument divin. Il hydrate sans alourdir la peau. Ma peau est douce comme de la soie le matin. Meilleur achat beauté de l'année !", product: "Rice Cream" },
     { name: "Sofia B.", city: "Paris", rating: 5, text: "J'ai essayé tellement de toniques, mais celui-ci est le seul qui a vraiment éclairé mes taches. Ma peau a l'air en bonne santé et glowy en permanence.", product: "Rice Toner" },
   ];
+  const allReviews = [...extraFeedbacks, ...reviews];
+  const latestReviews = allReviews.slice(0, 3);
 
   return (
-    <section style={{ padding: '100px 60px', background: '#FAF6F0' }}>
+    <section id="testimonials" style={{ padding: '100px 60px', background: '#FAF6F0' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#A07850', fontWeight: 600, marginBottom: '12px', textAlign: 'center' }}>✦ Témoignages</p>
         <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', fontWeight: 400, color: '#2A1F14', textAlign: 'center', marginBottom: '50px' }}>
@@ -86,7 +89,7 @@ export function TestimonialsSection() {
         </h2>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
-          {reviews.map((r, i) => (
+          {latestReviews.map((r, i) => (
             <div key={i} style={{ background: 'white', borderRadius: '20px', padding: '28px', boxShadow: '0 4px 20px rgba(42,31,20,0.07)' }}>
               <div style={{ color: '#C9A87C', fontSize: '1rem', marginBottom: '14px' }}>{'★'.repeat(r.rating)}</div>
               <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.88rem', color: '#6B5A48', lineHeight: 1.75, marginBottom: '20px', fontStyle: 'italic' }}>
@@ -104,7 +107,54 @@ export function TestimonialsSection() {
             </div>
           ))}
         </div>
+        {allReviews.length > 3 && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '32px' }}>
+            <button onClick={() => setShowAll(true)} style={{
+              background: '#6B4F32', color: 'white', border: 'none', borderRadius: '50px',
+              padding: '14px 32px', fontFamily: "'Jost', sans-serif", fontSize: '0.9rem', fontWeight: 600,
+              cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.08em', transition: 'all 0.3s ease',
+            }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#2A1F14'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = '#6B4F32'; e.currentTarget.style.transform = 'translateY(0)'; }}
+            >Voir tout</button>
+          </div>
+        )}
       </div>
+
+      {showAll && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 2200, background: 'rgba(42,31,20,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '30px' }}>
+          <div style={{ width: '100%', maxWidth: '1100px', background: 'white', borderRadius: '28px', overflow: 'hidden', maxHeight: '90vh', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '24px 28px', borderBottom: '1px solid #EDE3D5' }}>
+              <div>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.6rem', color: '#2A1F14', marginBottom: '6px' }}>Tous les avis</h3>
+                <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.9rem', color: '#6B5A48' }}>Découvrez tous les retours de nos clientes.</p>
+              </div>
+              <button onClick={() => setShowAll(false)} style={{ border: 'none', background: 'transparent', fontSize: '1.8rem', cursor: 'pointer', color: '#6B4F32' }}>✕</button>
+            </div>
+            <div style={{ padding: '24px', overflowY: 'auto' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+                {allReviews.map((r, i) => (
+                  <div key={i} style={{ background: 'white', borderRadius: '20px', padding: '28px', boxShadow: '0 4px 20px rgba(42,31,20,0.07)' }}>
+                    <div style={{ color: '#C9A87C', fontSize: '1rem', marginBottom: '14px' }}>{'★'.repeat(r.rating)}</div>
+                    <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.88rem', color: '#6B5A48', lineHeight: 1.75, marginBottom: '20px', fontStyle: 'italic' }}>
+                      "{r.text}"
+                    </p>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div>
+                        <p style={{ fontFamily: "'Playfair Display', serif", fontSize: '0.95rem', fontWeight: 500, color: '#2A1F14' }}>{r.name}</p>
+                        <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.72rem', color: '#8C7B6A' }}>{r.city}</p>
+                      </div>
+                      <span style={{ background: '#FAF6F0', border: '1px solid #EDE3D5', borderRadius: '20px', padding: '4px 12px', fontFamily: "'Jost', sans-serif", fontSize: '0.68rem', color: '#6B4F32', fontWeight: 500 }}>
+                        {r.product}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

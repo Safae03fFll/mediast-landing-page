@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import './index.css';
 import { PRODUCTS, IMAGES } from './data';
 import Navbar from './Navbar';
@@ -16,7 +16,23 @@ export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [toast, setToast] = useState({ show: false, msg: '' });
   const [order, setOrder] = useState(null);
+  const [feedbacks, setFeedbacks] = useState([]);
   const productsRef = useRef(null);
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem('riceFeedbacks');
+    if (saved) {
+      try {
+        setFeedbacks(JSON.parse(saved));
+      } catch (err) {
+        console.warn('Unable to parse saved feedbacks', err);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('riceFeedbacks', JSON.stringify(feedbacks));
+  }, [feedbacks]);
 
   // Toast helper
   const showToast = (msg) => {
@@ -80,6 +96,10 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const addFeedback = useCallback((feedback) => {
+    setFeedbacks(prev => [feedback, ...prev]);
+  }, []);
+
   // Render
   if (page === 'checkout') {
     return (
@@ -95,7 +115,7 @@ export default function App() {
     return (
       <>
         <Navbar cartCount={0} onCartOpen={() => {}} onNavClick={() => { setPage('home'); window.scrollTo(0, 0); }} />
-        <SuccessPage order={order} onContinue={() => { setPage('home'); window.scrollTo(0, 0); }} />
+        <SuccessPage order={order} onContinue={() => { setPage('home'); setTimeout(() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }), 100); }} onAddFeedback={addFeedback} />
       </>
     );
   }
@@ -202,7 +222,7 @@ export default function App() {
         <FeaturesSection />
 
         {/* Testimonials */}
-        <TestimonialsSection />
+        <TestimonialsSection extraFeedbacks={feedbacks} />
 
         {/* CTA Banner */}
         <section style={{
