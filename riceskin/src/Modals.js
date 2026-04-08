@@ -9,7 +9,7 @@ export function ProductModal({ product, open, onClose, onAddToCart }) {
   if (!product || !open) return null;
 
   const handleAdd = () => {
-    for (let i = 0; i < qty; i++) onAddToCart(product);
+    onAddToCart(product, qty);
     setAdded(true);
     setTimeout(() => setAdded(false), 2500);
   };
@@ -132,7 +132,7 @@ export function ProductModal({ product, open, onClose, onAddToCart }) {
               letterSpacing: '0.06em', cursor: 'pointer', transition: 'all 0.3s ease',
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
             }}>
-              {added ? '✓ Ajouté au panier !' : '+ Ajouter au panier'}
+              {added ? '✓ Acheté !' : '+ Acheter'}
             </button>
           </div>
         </div>

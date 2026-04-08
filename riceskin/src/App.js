@@ -4,7 +4,6 @@ import { PRODUCTS, IMAGES } from './data';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import { MarqueeStrip, ProductCard } from './Components';
-import CartDrawer from './CartDrawer';
 import Checkout from './Checkout';
 import { ProductModal, SuccessPage } from './Modals';
 import { FeaturesSection, TestimonialsSection, Footer } from './Sections';
@@ -13,7 +12,6 @@ import Toast from './Toast';
 export default function App() {
   const [page, setPage] = useState('home'); // 'home' | 'checkout' | 'success'
   const [cart, setCart] = useState([]);
-  const [cartOpen, setCartOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [toast, setToast] = useState({ show: false, msg: '' });
@@ -33,7 +31,7 @@ export default function App() {
       if (existing) return prev.map(i => i.id === product.id ? { ...i, qty: i.qty + 1 } : i);
       return [...prev, { ...product, qty: 1 }];
     });
-    showToast(`✓ ${product.name} ajouté au panier`);
+    showToast(`✓ ${product.name} ajouté à la commande`);
   }, []);
 
   const updateQty = useCallback((id, delta) => {
@@ -48,6 +46,19 @@ export default function App() {
   }, []);
 
   const cartCount = cart.reduce((s, i) => s + i.qty, 0);
+
+  const buyBundle = useCallback(() => {
+    setCart(PRODUCTS.map(product => ({ ...product, qty: 1 })));
+    setPage('checkout');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  const buyProduct = useCallback((product, qty = 1) => {
+    setCart([{ ...product, qty }]);
+    setPage('checkout');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    showToast(`✓ ${product.name} ajouté à la commande`);
+  }, []);
 
   // Navigation
   const handleNavClick = (dest) => {
@@ -73,8 +84,7 @@ export default function App() {
   if (page === 'checkout') {
     return (
       <>
-        <Navbar cartCount={cartCount} onCartOpen={() => setCartOpen(true)} onNavClick={() => { setPage('home'); window.scrollTo(0, 0); }} />
-        <CartDrawer cart={cart} open={cartOpen} onClose={() => setCartOpen(false)} onUpdateQty={updateQty} onRemove={removeFromCart} onCheckout={() => setCartOpen(false)} />
+        <Navbar cartCount={cartCount} onCartOpen={buyBundle} onNavClick={() => { setPage('home'); window.scrollTo(0, 0); }} />
         <Checkout cart={cart} onBack={() => setPage('home')} onSuccess={handleCheckoutSuccess} />
         <Toast message={toast.msg} show={toast.show} />
       </>
@@ -95,17 +105,8 @@ export default function App() {
       {/* Global nav */}
       <Navbar
         cartCount={cartCount}
-        onCartOpen={() => setCartOpen(true)}
+        onCartOpen={buyBundle}
         onNavClick={handleNavClick}
-      />
-
-      {/* Cart */}
-      <CartDrawer
-        cart={cart} open={cartOpen}
-        onClose={() => setCartOpen(false)}
-        onUpdateQty={updateQty}
-        onRemove={removeFromCart}
-        onCheckout={() => { setCartOpen(false); setPage('checkout'); window.scrollTo(0, 0); }}
       />
 
       {/* Product modal */}
@@ -113,11 +114,8 @@ export default function App() {
         product={selectedProduct}
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        onAddToCart={(p) => { addToCart(p); setModalOpen(false); setCartOpen(true); }}
+        onAddToCart={(p, qty) => { buyProduct(p, qty); setModalOpen(false); }}
       />
-
-      {/* Toast */}
-      <Toast message={toast.msg} show={toast.show} />
 
       {/* ===== HOME PAGE ===== */}
       <main>
@@ -147,7 +145,7 @@ export default function App() {
                 <ProductCard
                   key={product.id}
                   product={product}
-                  onAddToCart={(p) => { addToCart(p); setCartOpen(true); }}
+                  onAddToCart={(p) => { buyProduct(p); }}
                   onViewProduct={(p) => { setSelectedProduct(p); setModalOpen(true); }}
                 />
               ))}

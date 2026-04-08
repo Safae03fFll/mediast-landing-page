@@ -53,8 +53,8 @@ export default function Checkout({ cart, onBack, onSuccess }) {
   const [step, setStep] = useState(1); // 1 = shipping, 2 = payment
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
-    firstName: '', lastName: '', email: '', phone: '',
-    address: '', city: '', zip: '', country: 'Maroc',
+    firstName: '', lastName: '', phone: '',
+    city: '',
     paymentMethod: 'card',
     cardName: '', cardNumber: '', expiry: '', cvv: '',
     notes: '',
@@ -85,9 +85,8 @@ export default function Checkout({ cart, onBack, onSuccess }) {
       orderNumber: `RS-${Date.now()}`,
       date: new Date().toLocaleString('fr-FR'),
       customer: `${form.firstName} ${form.lastName}`,
-      email: form.email,
       phone: form.phone,
-      address: `${form.address}, ${form.zip} ${form.city}, ${form.country}`,
+      city: form.city,
       items: cart.map(i => `${i.name} x${i.qty} (${(i.price * i.qty).toFixed(2)}€)`).join(' | '),
       subtotal: total.toFixed(2),
       shipping: shipping.toFixed(2),
@@ -161,18 +160,23 @@ export default function Checkout({ cart, onBack, onSuccess }) {
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
                   <Field label="Prénom" name="firstName" value={form.firstName} onChange={update} placeholder="Youssef" required half />
                   <Field label="Nom" name="lastName" value={form.lastName} onChange={update} placeholder="Alami" required half />
-                  <Field label="Email" name="email" value={form.email} onChange={update} type="email" placeholder="vous@exemple.com" required />
-                  <Field label="Téléphone" name="phone" value={form.phone} onChange={update} placeholder="+212 6XX XXX XXX" />
-                  <Field label="Adresse" name="address" value={form.address} onChange={update} placeholder="123, Rue Mohammed V" required />
-                  <Field label="Ville" name="city" value={form.city} onChange={update} placeholder="Casablanca" required half />
-                  <Field label="Code postal" name="zip" value={form.zip} onChange={update} placeholder="20000" half />
-                  <SelectField label="Pays" name="country" value={form.country} onChange={update} options={[
-                    { value: 'Maroc', label: '🇲🇦 Maroc' },
-                    { value: 'France', label: '🇫🇷 France' },
-                    { value: 'Belgique', label: '🇧🇪 Belgique' },
-                    { value: 'Suisse', label: '🇨🇭 Suisse' },
-                    { value: 'Canada', label: '🇨🇦 Canada' },
-                    { value: 'Autre', label: '🌍 Autre' },
+                  <Field label="Téléphone" name="phone" value={form.phone} onChange={update} placeholder="+212 6XX XXX XXX" required half />
+                  <SelectField label="Ville" name="city" value={form.city} onChange={update} options={[
+                    { value: '', label: 'Sélectionnez une ville' },
+                    { value: 'Casablanca', label: 'Casablanca' },
+                    { value: 'Rabat', label: 'Rabat' },
+                    { value: 'Marrakech', label: 'Marrakech' },
+                    { value: 'Fès', label: 'Fès' },
+                    { value: 'Tanger', label: 'Tanger' },
+                    { value: 'Agadir', label: 'Agadir' },
+                    { value: 'Oujda', label: 'Oujda' },
+                    { value: 'Meknès', label: 'Meknès' },
+                    { value: 'Essaouira', label: 'Essaouira' },
+                    { value: 'Nador', label: 'Nador' },
+                    { value: 'Safi', label: 'Safi' },
+                    { value: 'Kenitra', label: 'Kénitra' },
+                    { value: 'Tétouan', label: 'Tétouan' },
+                    { value: 'El Jadida', label: 'El Jadida' },
                   ]} />
                   <div style={{ flex: '1 1 100%' }}>
                     <label style={labelStyle}>Notes de commande (optionnel)</label>
@@ -196,7 +200,7 @@ export default function Checkout({ cart, onBack, onSuccess }) {
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginTop: '20px' }}>
                     <Field label="Nom sur la carte" name="cardName" value={form.cardName} onChange={update} placeholder="YOUSSEF ALAMI" required />
                     <Field label="Numéro de carte" name="cardNumber" value={form.cardNumber} onChange={update} placeholder="4242 4242 4242 4242" required />
-                    <Field label="Date d'expiration" name="expiry" value={form.expiry} onChange={update} placeholder="MM/AA" required half />
+                    <Field label="Date d'expiration" name="expiry" type="date" value={form.expiry} onChange={update} required half />
                     <Field label="CVV" name="cvv" value={form.cvv} onChange={update} placeholder="123" required half />
                   </div>
                 )}
