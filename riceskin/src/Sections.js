@@ -3,10 +3,10 @@ import { IMAGES } from './data';
 
 export function FeaturesSection() {
   const features = [
-    { icon: '🌾', title: 'Extrait de riz 77%', desc: 'La plus haute concentration de riz fermenté pour des résultats visibles en 7 jours.' },
-    { icon: '🧪', title: 'Testé dermatologiquement', desc: 'Formules douces, non-comédogènes, adaptées à tous types de peaux même sensibles.' },
-    { icon: '🌿', title: '100% Naturel', desc: 'Sans parabens, sans sulfates, sans colorants artificiels. Pur et efficace.' },
-    { icon: '♻️', title: 'Éco-responsable', desc: 'Emballages recyclables et formules respectueuses de l\'environnement.' },
+    { icon: '', title: 'Extrait de riz 77%', desc: 'La plus haute concentration de riz fermenté pour des résultats visibles en 7 jours.' },
+    { icon: '', title: 'Testé dermatologiquement', desc: 'Formules douces, non-comédogènes, adaptées à tous types de peaux même sensibles.' },
+    { icon: '', title: '100% Naturel', desc: 'Sans parabens, sans sulfates, sans colorants artificiels. Pur et efficace.' },
+    { icon: '', title: 'Éco-responsable', desc: 'Emballages recyclables et formules respectueuses de l\'environnement.' },
   ];
 
   return (
@@ -16,7 +16,7 @@ export function FeaturesSection() {
           {/* Left */}
           <div>
             <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#A07850', fontWeight: 600, marginBottom: '16px' }}>
-              ✦ Notre philosophie
+              Notre philosophie
             </p>
             <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', fontWeight: 400, color: '#2A1F14', lineHeight: 1.15, marginBottom: '20px' }}>
               Le secret de la peau<br /><em style={{ fontStyle: 'italic', color: '#6B4F32' }}>en Corée du Sud</em>
@@ -31,7 +31,7 @@ export function FeaturesSection() {
                   background: '#FAF6F0', borderRadius: '16px', padding: '20px',
                   border: '1px solid #EDE3D5',
                 }}>
-                  <div style={{ fontSize: '1.6rem', marginBottom: '10px' }}>{f.icon}</div>
+                  {f.icon && <div style={{ fontSize: '1.6rem', marginBottom: '10px' }}>{f.icon}</div>}
                   <h4 style={{ fontFamily: "'Playfair Display', serif", fontSize: '0.95rem', fontWeight: 500, color: '#2A1F14', marginBottom: '6px' }}>{f.title}</h4>
                   <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.78rem', color: '#8C7B6A', lineHeight: 1.6 }}>{f.desc}</p>
                 </div>
@@ -60,7 +60,7 @@ export function FeaturesSection() {
               boxShadow: '0 10px 30px rgba(107,79,50,0.3)',
             }}>
               <div style={{ fontSize: '0.62rem', letterSpacing: '0.12em', opacity: 0.75, textTransform: 'uppercase', marginBottom: '4px' }}>Avis clients</div>
-              <div style={{ fontSize: '1.4rem', fontWeight: 700 }}>4.9 ⭐</div>
+              <div style={{ fontSize: '1.4rem', fontWeight: 700 }}>4.9</div>
               <div style={{ fontSize: '0.7rem', opacity: 0.8 }}>+2000 avis vérifiés</div>
             </div>
           </div>
@@ -83,7 +83,7 @@ export function TestimonialsSection({ extraFeedbacks = [] }) {
   return (
     <section id="testimonials" style={{ padding: '100px 60px', background: '#FAF6F0' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-        <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#A07850', fontWeight: 600, marginBottom: '12px', textAlign: 'center' }}>✦ Témoignages</p>
+        <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#A07850', fontWeight: 600, marginBottom: '12px', textAlign: 'center' }}>Témoignages</p>
         <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', fontWeight: 400, color: '#2A1F14', textAlign: 'center', marginBottom: '50px' }}>
           Ce que disent nos <em style={{ fontStyle: 'italic', color: '#6B4F32' }}>clientes</em>
         </h2>
@@ -91,7 +91,7 @@ export function TestimonialsSection({ extraFeedbacks = [] }) {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
           {latestReviews.map((r, i) => (
             <div key={i} style={{ background: 'white', borderRadius: '20px', padding: '28px', boxShadow: '0 4px 20px rgba(42,31,20,0.07)' }}>
-              <div style={{ color: '#C9A87C', fontSize: '1rem', marginBottom: '14px' }}>{'★'.repeat(r.rating)}</div>
+              <div style={{ color: '#C9A87C', fontSize: '1rem', marginBottom: '14px' }}>{`${r.rating}/5`}</div>
               <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.88rem', color: '#6B5A48', lineHeight: 1.75, marginBottom: '20px', fontStyle: 'italic' }}>
                 "{r.text}"
               </p>
@@ -129,13 +129,13 @@ export function TestimonialsSection({ extraFeedbacks = [] }) {
                 <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.6rem', color: '#2A1F14', marginBottom: '6px' }}>Tous les avis</h3>
                 <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.9rem', color: '#6B5A48' }}>Découvrez tous les retours de nos clientes.</p>
               </div>
-              <button onClick={() => setShowAll(false)} style={{ border: 'none', background: 'transparent', fontSize: '1.8rem', cursor: 'pointer', color: '#6B4F32' }}>✕</button>
+              <button onClick={() => setShowAll(false)} style={{ border: 'none', background: 'transparent', fontSize: '1.8rem', cursor: 'pointer', color: '#6B4F32' }}>Fermer</button>
             </div>
             <div style={{ padding: '24px', overflowY: 'auto' }}>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
                 {allReviews.map((r, i) => (
                   <div key={i} style={{ background: 'white', borderRadius: '20px', padding: '28px', boxShadow: '0 4px 20px rgba(42,31,20,0.07)' }}>
-                    <div style={{ color: '#C9A87C', fontSize: '1rem', marginBottom: '14px' }}>{'★'.repeat(r.rating)}</div>
+                    <div style={{ color: '#C9A87C', fontSize: '1rem', marginBottom: '14px' }}>{`${r.rating}/5`}</div>
                     <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.88rem', color: '#6B5A48', lineHeight: 1.75, marginBottom: '20px', fontStyle: 'italic' }}>
                       "{r.text}"
                     </p>
@@ -192,7 +192,7 @@ export function Footer() {
         </div>
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>© 2024 I'm From Rice Skincare. Tous droits réservés.</p>
-          <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>🔒 Paiement sécurisé SSL</p>
+          <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>Paiement sécurisé SSL</p>
         </div>
       </div>
     </footer>

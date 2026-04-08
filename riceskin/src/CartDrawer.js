@@ -52,7 +52,7 @@ export default function CartDrawer({ cart, open, onClose, onUpdateQty, onRemove,
             onMouseEnter={e => e.currentTarget.style.background = '#DDD0BE'}
             onMouseLeave={e => e.currentTarget.style.background = '#EDE3D5'}
           >
-            ✕
+            X
           </button>
         </div>
 
@@ -141,7 +141,7 @@ export default function CartDrawer({ cart, open, onClose, onUpdateQty, onRemove,
                 marginBottom: '16px', fontFamily: "'Jost', sans-serif", fontSize: '0.8rem', color: '#6B4F32',
                 textAlign: 'center',
               }}>
-                Plus que <strong>{(60 - total).toFixed(2)}€</strong> pour la livraison gratuite 🚚
+                Plus que <strong>{(60 - total).toFixed(2)}€</strong> pour la livraison gratuite
               </div>
             )}
             {total >= 60 && (
@@ -175,7 +175,7 @@ export default function CartDrawer({ cart, open, onClose, onUpdateQty, onRemove,
             </button>
 
             <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.72rem', color: '#B0A090', textAlign: 'center', marginTop: '12px' }}>
-              🔒 Paiement sécurisé · Retours sous 30 jours
+              Paiement sécurisé · Retours sous 30 jours
             </p>
           </div>
         )}

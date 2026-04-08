@@ -17,7 +17,7 @@ export function MarqueeStrip() {
             letterSpacing: '0.2em', textTransform: 'uppercase',
             padding: '0 36px', opacity: 0.85,
           }}>
-            ✦ {item}
+            {item}
           </span>
         ))}
       </div>

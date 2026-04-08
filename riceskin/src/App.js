@@ -3,7 +3,7 @@ import './index.css';
 import { PRODUCTS, IMAGES } from './data';
 import Navbar from './Navbar';
 import Hero from './Hero';
-import { MarqueeStrip, ProductCard } from './Components';
+import { ProductCard } from './Components';
 import Checkout from './Checkout';
 import { ProductModal, SuccessPage } from './Modals';
 import { FeaturesSection, TestimonialsSection, Footer } from './Sections';
@@ -142,14 +142,11 @@ export default function App() {
         {/* Hero */}
         <Hero onShopClick={() => productsRef.current?.scrollIntoView({ behavior: 'smooth' })} />
 
-        {/* Marquee */}
-        <MarqueeStrip />
-
         {/* Products section */}
         <section ref={productsRef} style={{ padding: '100px 60px', background: '#FAF6F0' }}>
           <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
             <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.72rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: '#A07850', fontWeight: 600, marginBottom: '12px' }}>
-              ✦ Notre collection
+              Notre collection
             </p>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '50px' }}>
               <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', fontWeight: 400, color: '#2A1F14', lineHeight: 1.15 }}>
@@ -230,7 +227,7 @@ export default function App() {
           background: 'linear-gradient(135deg, #EDE3D5 0%, #FAF6F0 100%)',
         }}>
           <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.72rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: '#A07850', fontWeight: 600, marginBottom: '16px' }}>
-            ✦ Offre limitée
+            Offre limitée
           </p>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2rem, 4vw, 3.2rem)', fontWeight: 400, color: '#2A1F14', marginBottom: '14px' }}>
             Livraison gratuite dès <em style={{ color: '#6B4F32', fontStyle: 'italic' }}>60€</em>

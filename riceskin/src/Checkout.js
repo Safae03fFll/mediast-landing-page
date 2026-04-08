@@ -190,10 +190,10 @@ export default function Checkout({ cart, onBack, onSuccess }) {
               <>
                 <SectionTitle step={2}>Paiement</SectionTitle>
                 <SelectField label="Méthode de paiement" name="paymentMethod" value={form.paymentMethod} onChange={update} options={[
-                  { value: 'card', label: '💳 Carte bancaire' },
-                  { value: 'paypal', label: '🅿️ PayPal' },
-                  { value: 'cod', label: '💵 Paiement à la livraison' },
-                  { value: 'virement', label: '🏦 Virement bancaire' },
+                  { value: 'card', label: 'Carte bancaire' },
+                  { value: 'paypal', label: 'PayPal' },
+                  { value: 'cod', label: 'Paiement à la livraison' },
+                  { value: 'virement', label: 'Virement bancaire' },
                 ]} />
 
                 {form.paymentMethod === 'card' && (
@@ -287,7 +287,7 @@ export default function Checkout({ cart, onBack, onSuccess }) {
             ))}
 
             <div style={{ marginTop: '16px' }}>
-              {[['Sous-total', `${total.toFixed(2)}€`], ['Livraison', shipping === 0 ? '🎁 Gratuite' : `${shipping.toFixed(2)}€`]].map(([k, v]) => (
+              {[['Sous-total', `${total.toFixed(2)}€`], ['Livraison', shipping === 0 ? 'Gratuite' : `${shipping.toFixed(2)}€`]].map(([k, v]) => (
                 <div key={k} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', fontFamily: "'Jost', sans-serif", fontSize: '0.85rem', color: '#8C7B6A' }}>
                   <span>{k}</span><span style={{ color: shipping === 0 && k === 'Livraison' ? '#8FA688' : '#6B4F32' }}>{v}</span>
                 </div>
@@ -300,9 +300,9 @@ export default function Checkout({ cart, onBack, onSuccess }) {
 
             {/* Trust */}
             <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {[['🔒', 'Paiement 100% sécurisé'], ['🚚', 'Livraison rapide 2-5 jours'], ['↩️', 'Retours gratuits 30 jours'], ['🌿', 'Formules 100% naturelles']].map(([icon, text]) => (
-                <div key={text} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontFamily: "'Jost', sans-serif", fontSize: '0.78rem', color: '#8C7B6A' }}>
-                  <span style={{ fontSize: '1rem' }}>{icon}</span>{text}
+              {['Paiement 100% sécurisé', 'Livraison rapide 2-5 jours', 'Retours gratuits 30 jours', 'Formules 100% naturelles'].map((text) => (
+                <div key={text} style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.78rem', color: '#8C7B6A' }}>
+                  {text}
                 </div>
               ))}
             </div>

@@ -69,7 +69,7 @@ export function ProductModal({ product, open, onClose, onAddToCart }) {
             width: '36px', height: '36px', borderRadius: '50%',
             background: '#EDE3D5', border: 'none', cursor: 'pointer',
             fontSize: '1rem', color: '#6B4F32', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>✕</button>
+          }}>X</button>
 
           <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.7rem', color: '#A07850', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '8px' }}>
             {product.brand} · {product.size}
@@ -180,19 +180,12 @@ export function SuccessPage({ order, onContinue, onAddFeedback }) {
           margin: '0 auto 28px', fontSize: '2rem',
           boxShadow: '0 12px 32px rgba(107,79,50,0.3)',
           animation: 'pulse 2s ease infinite',
-        }}>✨</div>
-
-        <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: '2.4rem', fontWeight: 400, color: '#2A1F14', marginBottom: '12px' }}>
-          Merci pour votre <em style={{ fontStyle: 'italic', color: '#6B4F32' }}>commande</em> !
-        </h1>
-        <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.95rem', color: '#8C7B6A', lineHeight: 1.7, marginBottom: '32px' }}>
-          Votre commande <strong style={{ color: '#6B4F32' }}>#{order?.orderNumber}</strong> a été confirmée et enregistrée. Un message de confirmation vous sera envoyé au numéro <strong>{order?.phone}</strong>.
-        </p>
+        }}>✓</div>
 
         <div style={{ background: '#FAF6F0', borderRadius: '16px', padding: '20px', marginBottom: '32px', textAlign: 'left' }}>
-          {[['📦', 'Préparation', '1-2 jours ouvrables'], ['🚚', 'Livraison', '2-5 jours ouvrables'], ['�', 'Suivi', 'Par SMS']].map(([icon, label, val]) => (
+          {[['Préparation', '1-2 jours ouvrables'], ['Livraison', '2-5 jours ouvrables'], ['Suivi', 'Par SMS']].map(([label, val]) => (
             <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', fontFamily: "'Jost', sans-serif", fontSize: '0.83rem' }}>
-              <span style={{ color: '#6B5A48' }}>{icon} {label}</span>
+              <span style={{ color: '#6B5A48' }}>{label}</span>
               <span style={{ color: '#6B4F32', fontWeight: 500 }}>{val}</span>
             </div>
           ))}
@@ -208,7 +201,7 @@ export function SuccessPage({ order, onContinue, onAddFeedback }) {
                 background: value <= rating ? '#6B4F32' : '#FAF6F0', color: value <= rating ? 'white' : '#6B4F32',
                 fontSize: '1.1rem', cursor: 'pointer', transition: 'all 0.2s ease',
               }}>
-                ★
+                {value}
               </button>
             ))}
           </div>

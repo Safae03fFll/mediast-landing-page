@@ -140,7 +140,7 @@ export default function Hero({ onShopClick }) {
         </div>
 
         <div className="fade-up-d4" style={S.statsRow}>
-          {[['77%', "Extrait de riz"], ['10K+', "Clientes satisfaites"], ['2018', "Depuis"], ['🌿', "100% Naturel"]].map(([num, label]) => (
+          {[['77%', "Extrait de riz"], ['10K+', "Clientes satisfaites"], ['2018', "Depuis"], ['', "100% Naturel"]].map(([num, label]) => (
             <div key={label} style={S.stat}>
               <span style={S.statNum}>{num}</span>
               <span style={S.statLabel}>{label}</span>
@@ -158,12 +158,12 @@ export default function Hero({ onShopClick }) {
 
           <div style={S.floatCard}>
             <div style={S.floatCardLabel}>Ingrédient principal</div>
-            <div style={S.floatCardValue}>🌾 Riz Fermenté</div>
+            <div style={S.floatCardValue}>Riz Fermenté</div>
           </div>
 
           <div style={S.floatCard2}>
             <div style={{ fontSize: '0.65rem', letterSpacing: '0.1em', opacity: 0.8, textTransform: 'uppercase' }}>Texture</div>
-            <div style={{ fontSize: '0.9rem', fontWeight: 600, marginTop: '2px' }}>Glass Skin ✨</div>
+            <div style={{ fontSize: '0.9rem', fontWeight: 600, marginTop: '2px' }}>Glass Skin</div>
           </div>
         </div>
       </div>
