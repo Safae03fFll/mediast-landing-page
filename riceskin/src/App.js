@@ -23,7 +23,11 @@ export default function App() {
     const saved = window.localStorage.getItem('riceFeedbacks');
     if (saved) {
       try {
-        setFeedbacks(JSON.parse(saved));
+        const parsed = JSON.parse(saved);
+        const filtered = Array.isArray(parsed)
+          ? parsed.filter(feedback => typeof feedback.name === 'string' && feedback.name.trim().toLowerCase() !== 'safae fliou')
+          : [];
+        setFeedbacks(filtered);
       } catch (err) {
         console.warn('Unable to parse saved feedbacks', err);
       }
@@ -96,10 +100,6 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const addFeedback = useCallback((feedback) => {
-    setFeedbacks(prev => [feedback, ...prev]);
-  }, []);
-
   // Render
   if (page === 'checkout') {
     return (
@@ -115,7 +115,7 @@ export default function App() {
     return (
       <>
         <Navbar cartCount={0} onCartOpen={() => {}} onNavClick={() => { setPage('home'); window.scrollTo(0, 0); }} />
-        <SuccessPage order={order} onContinue={() => { setPage('home'); setTimeout(() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }), 100); }} onAddFeedback={addFeedback} />
+        <SuccessPage order={order} onContinue={() => { setPage('home'); setTimeout(() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }), 100); }} />
       </>
     );
   }

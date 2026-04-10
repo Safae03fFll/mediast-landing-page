@@ -141,25 +141,7 @@ export function ProductModal({ product, open, onClose, onAddToCart }) {
   );
 }
 
-export function SuccessPage({ order, onContinue, onAddFeedback }) {
-  const [rating, setRating] = React.useState(0);
-  const [feedback, setFeedback] = React.useState('');
-  const [submitted, setSubmitted] = React.useState(false);
-
-  const firstProduct = order?.items?.split(' | ')[0]?.split(' x')[0] || 'Produit';
-
-  const handleFeedbackSubmit = () => {
-    if (!rating || !feedback.trim()) return;
-    onAddFeedback({
-      name: order?.customer || 'Cliente',
-      city: order?.city || 'Maroc',
-      rating,
-      text: feedback.trim(),
-      product: firstProduct,
-    });
-    setSubmitted(true);
-  };
-
+export function SuccessPage({ order, onContinue }) {
   return (
     <div style={{
       minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -183,7 +165,7 @@ export function SuccessPage({ order, onContinue, onAddFeedback }) {
         }}>✓</div>
 
         <div style={{ background: '#FAF6F0', borderRadius: '16px', padding: '20px', marginBottom: '32px', textAlign: 'left' }}>
-          {[['Préparation', '1-2 jours ouvrables'], ['Livraison', '2-5 jours ouvrables'], ['Suivi', 'Par SMS']].map(([label, val]) => (
+          {[['Préparation', '1-2 jours ouvrables'], ['Livraison', '2-5 jours ouvrables'], ['Suivi', 'par appel']].map(([label, val]) => (
             <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', fontFamily: "'Jost', sans-serif", fontSize: '0.83rem' }}>
               <span style={{ color: '#6B5A48' }}>{label}</span>
               <span style={{ color: '#6B4F32', fontWeight: 500 }}>{val}</span>
@@ -191,32 +173,11 @@ export function SuccessPage({ order, onContinue, onAddFeedback }) {
           ))}
         </div>
 
-        <div style={{ background: '#fff', borderRadius: '20px', padding: '24px', marginBottom: '28px', boxShadow: '0 8px 24px rgba(42,31,20,0.06)' }}>
-          <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.25rem', fontWeight: 500, color: '#2A1F14', marginBottom: '16px' }}>Votre avis</h3>
-          <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.9rem', color: '#6B5A48', marginBottom: '18px' }}>Partagez votre expérience et notez votre achat.</p>
-          <div style={{ display: 'flex', gap: '10px', marginBottom: '18px' }}>
-            {[1, 2, 3, 4, 5].map(value => (
-              <button key={value} type="button" onClick={() => setRating(value)} style={{
-                width: '42px', height: '42px', borderRadius: '50%', border: value <= rating ? 'none' : '1px solid #EDE3D5',
-                background: value <= rating ? '#6B4F32' : '#FAF6F0', color: value <= rating ? 'white' : '#6B4F32',
-                fontSize: '1.1rem', cursor: 'pointer', transition: 'all 0.2s ease',
-              }}>
-                {value}
-              </button>
-            ))}
-          </div>
-          <textarea
-            value={feedback}
-            onChange={e => setFeedback(e.target.value)}
-            placeholder="Votre message..."
-            rows={4}
-            style={{ width: '100%', padding: '14px 16px', borderRadius: '18px', border: '1px solid #EDE3D5', fontFamily: "'Jost', sans-serif", fontSize: '0.9rem', color: '#2A1F14', resize: 'vertical', marginBottom: '18px' }}
-          />
-          <button onClick={handleFeedbackSubmit} disabled={submitted || !rating || !feedback.trim()} style={{
-            width: '100%', background: submitted ? '#B0A090' : '#6B4F32', color: 'white', border: 'none', padding: '16px 0', borderRadius: '50px', cursor: submitted ? 'not-allowed' : 'pointer', fontFamily: "'Jost', sans-serif", fontSize: '0.92rem', fontWeight: 700, letterSpacing: '0.08em', transition: 'all 0.3s ease',
-          }}>
-            {submitted ? 'Merci pour votre avis !' : 'Envoyer mon avis'}
-          </button>
+        <div style={{ padding: '0 14px 32px' }}>
+          <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.5rem', fontWeight: 500, color: '#2A1F14', marginBottom: '14px' }}>Merci pour votre commande !</h3>
+          <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.95rem', color: '#6B5A48', lineHeight: 1.7, marginBottom: '28px' }}>
+            Votre commande a bien été enregistrée. Nous vous contacterons par appel lorsque votre colis sera prêt.
+          </p>
         </div>
 
         <button onClick={onContinue} style={{
