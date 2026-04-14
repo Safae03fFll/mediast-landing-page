@@ -1,4 +1,5 @@
 import React from 'react';
+import { FiX, FiMinus, FiPlus, FiTrash2 } from 'react-icons/fi';
 
 export default function CartDrawer({ cart, open, onClose, onUpdateQty, onRemove, onCheckout }) {
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
@@ -47,12 +48,12 @@ export default function CartDrawer({ cart, open, onClose, onUpdateQty, onRemove,
             width: '40px', height: '40px', borderRadius: '50%',
             background: '#EDE3D5', border: 'none', cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            transition: 'background 0.2s', fontSize: '1.1rem', color: '#6B4F32',
+            transition: 'background 0.2s',
           }}
             onMouseEnter={e => e.currentTarget.style.background = '#DDD0BE'}
             onMouseLeave={e => e.currentTarget.style.background = '#EDE3D5'}
           >
-            X
+            <FiX size={20} color="#6B4F32" />
           </button>
         </div>
 
@@ -60,7 +61,11 @@ export default function CartDrawer({ cart, open, onClose, onUpdateQty, onRemove,
         <div style={{ flex: 1, overflowY: 'auto', padding: '20px 28px' }}>
           {cart.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '80px 20px', color: '#B0A090' }}>
-              <div style={{ fontSize: '3.5rem', marginBottom: '16px' }}>🧴</div>
+              <div style={{ fontSize: '3.5rem', marginBottom: '16px' }}>
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M20 10L20 15C20 18 22 20 25 20H35C38 20 40 18 40 15V10M25 20V50M35 20V50M20 20H40C42 20 44 22 44 24V52C44 54 42 56 40 56H20C18 56 16 54 16 52V24C16 22 18 20 20 20Z" />
+                </svg>
+              </div>
               <p style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.2rem', color: '#6B5A48', marginBottom: '8px' }}>Votre panier est vide</p>
               <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.85rem' }}>Ajoutez des produits pour commencer</p>
             </div>
@@ -90,24 +95,26 @@ export default function CartDrawer({ cart, open, onClose, onUpdateQty, onRemove,
                     <button onClick={() => onUpdateQty(item.id, -1)} style={{
                       width: '30px', height: '30px', borderRadius: '50%',
                       border: '1.5px solid #EDE3D5', background: 'none', cursor: 'pointer',
-                      fontFamily: "'Jost', sans-serif", fontSize: '1.1rem', color: '#6B4F32',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       transition: 'all 0.2s',
                     }}
                       onMouseEnter={e => { e.currentTarget.style.background = '#EDE3D5'; }}
                       onMouseLeave={e => { e.currentTarget.style.background = 'none'; }}
-                    >−</button>
+                    >
+                      <FiMinus size={14} color="#6B4F32" />
+                    </button>
                     <span style={{ fontFamily: "'Jost', sans-serif", fontWeight: 600, fontSize: '0.95rem', minWidth: '20px', textAlign: 'center' }}>{item.qty}</span>
                     <button onClick={() => onUpdateQty(item.id, 1)} style={{
                       width: '30px', height: '30px', borderRadius: '50%',
                       border: '1.5px solid #EDE3D5', background: 'none', cursor: 'pointer',
-                      fontFamily: "'Jost', sans-serif", fontSize: '1.1rem', color: '#6B4F32',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       transition: 'all 0.2s',
                     }}
                       onMouseEnter={e => { e.currentTarget.style.background = '#EDE3D5'; }}
                       onMouseLeave={e => { e.currentTarget.style.background = 'none'; }}
-                    >+</button>
+                    >
+                      <FiPlus size={14} color="#6B4F32" />
+                    </button>
                   </div>
 
                   <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.1rem', fontWeight: 500, color: '#2A1F14' }}>
@@ -119,12 +126,12 @@ export default function CartDrawer({ cart, open, onClose, onUpdateQty, onRemove,
                   background: 'none', border: 'none', cursor: 'pointer',
                   fontFamily: "'Jost', sans-serif", fontSize: '0.72rem',
                   color: '#B0A090', marginTop: '8px', padding: '2px 0',
-                  transition: 'color 0.2s',
+                  transition: 'color 0.2s', display: 'flex', alignItems: 'center', gap: '6px',
                 }}
                   onMouseEnter={e => e.currentTarget.style.color = '#6B4F32'}
                   onMouseLeave={e => e.currentTarget.style.color = '#B0A090'}
                 >
-                  Supprimer
+                  <FiTrash2 size={14} /> Supprimer
                 </button>
               </div>
             </div>

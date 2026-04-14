@@ -1,4 +1,5 @@
 import React from 'react';
+import { FiShoppingBag } from 'react-icons/fi';
 
 const navStyles = {
   nav: {
@@ -68,10 +69,9 @@ export default function Navbar({ cartCount, onCartOpen, onNavClick }) {
         onMouseEnter={e => { e.currentTarget.style.background = '#2A1F14'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
         onMouseLeave={e => { e.currentTarget.style.background = '#6B4F32'; e.currentTarget.style.transform = 'translateY(0)'; }}
       >
-        <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
-        </svg>
+        <FiShoppingBag size={16} />
         Acheter
+        {cartCount > 0 && <span style={navStyles.cartCount}>{cartCount}</span>}
       </button>
     </nav>
   );

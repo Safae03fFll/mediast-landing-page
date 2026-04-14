@@ -1,12 +1,15 @@
 import React from 'react';
 import { IMAGES } from './data';
+import { MdOutlineWaterDrop, MdVerified, MdLocalFlorist, MdEco } from 'react-icons/md';
+import { AiFillStar } from 'react-icons/ai';
+import { FiInstagram, FiTwitter, FiFacebook, FiX } from 'react-icons/fi';
 
 export function FeaturesSection() {
   const features = [
-    { icon: '', title: 'Extrait de riz 77%', desc: 'La plus haute concentration de riz fermenté pour des résultats visibles en 7 jours.' },
-    { icon: '', title: 'Testé dermatologiquement', desc: 'Formules douces, non-comédogènes, adaptées à tous types de peaux même sensibles.' },
-    { icon: '', title: '100% Naturel', desc: 'Sans parabens, sans sulfates, sans colorants artificiels. Pur et efficace.' },
-    { icon: '', title: 'Éco-responsable', desc: 'Emballages recyclables et formules respectueuses de l\'environnement.' },
+    { icon: <MdOutlineWaterDrop style={{ color: '#6B4F32' }} />, title: 'Extrait de riz 77%', desc: 'La plus haute concentration de riz fermenté pour des résultats visibles en 7 jours.' },
+    { icon: <MdVerified style={{ color: '#6B4F32' }} />, title: 'Testé dermatologiquement', desc: 'Formules douces, non-comédogènes, adaptées à tous types de peaux même sensibles.' },
+    { icon: <MdLocalFlorist style={{ color: '#6B4F32' }} />, title: '100% Naturel', desc: 'Sans parabens, sans sulfates, sans colorants artificiels. Pur et efficace.' },
+    { icon: <MdEco style={{ color: '#6B4F32' }} />, title: 'Éco-responsable', desc: 'Emballages recyclables et formules respectueuses de l\'environnement.' },
   ];
 
   return (
@@ -91,7 +94,11 @@ export function TestimonialsSection({ extraFeedbacks = [] }) {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
           {latestReviews.map((r, i) => (
             <div key={i} style={{ background: 'white', borderRadius: '20px', padding: '28px', boxShadow: '0 4px 20px rgba(42,31,20,0.07)' }}>
-              <div style={{ color: '#C9A87C', fontSize: '1rem', marginBottom: '14px' }}>{`${r.rating}/5`}</div>
+              <div style={{ display: 'flex', gap: '4px', marginBottom: '14px' }}>
+                {[...Array(5)].map((_, j) => (
+                  <AiFillStar key={j} size={18} color={j < r.rating ? '#C9A87C' : '#E8D5C4'} />
+                ))}
+              </div>
               <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.88rem', color: '#6B5A48', lineHeight: 1.75, marginBottom: '20px', fontStyle: 'italic' }}>
                 "{r.text}"
               </p>
@@ -129,13 +136,22 @@ export function TestimonialsSection({ extraFeedbacks = [] }) {
                 <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.6rem', color: '#2A1F14', marginBottom: '6px' }}>Tous les avis</h3>
                 <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.9rem', color: '#6B5A48' }}>Découvrez tous les retours de nos clientes.</p>
               </div>
-              <button onClick={() => setShowAll(false)} style={{ border: 'none', background: 'transparent', fontSize: '1.8rem', cursor: 'pointer', color: '#6B4F32' }}>Fermer</button>
+              <button onClick={() => setShowAll(false)} style={{ border: 'none', background: 'transparent', cursor: 'pointer', padding: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6B4F32' }} 
+                onMouseEnter={e => e.currentTarget.style.color = '#2A1F14'}
+                onMouseLeave={e => e.currentTarget.style.color = '#6B4F32'}
+              >
+                <FiX size={24} />
+              </button>
             </div>
             <div style={{ padding: '24px', overflowY: 'auto' }}>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
                 {allReviews.map((r, i) => (
                   <div key={i} style={{ background: 'white', borderRadius: '20px', padding: '28px', boxShadow: '0 4px 20px rgba(42,31,20,0.07)' }}>
-                    <div style={{ color: '#C9A87C', fontSize: '1rem', marginBottom: '14px' }}>{`${r.rating}/5`}</div>
+                    <div style={{ display: 'flex', gap: '4px', marginBottom: '14px' }}>
+                      {[...Array(5)].map((_, j) => (
+                        <AiFillStar key={j} size={18} color={j < r.rating ? '#C9A87C' : '#E8D5C4'} />
+                      ))}
+                    </div>
                     <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.88rem', color: '#6B5A48', lineHeight: 1.75, marginBottom: '20px', fontStyle: 'italic' }}>
                       "{r.text}"
                     </p>
@@ -170,11 +186,21 @@ export function Footer() {
               Soins coréens enrichis en extraits de riz pour une peau lumineuse et hydratée.
             </p>
             <div style={{ display: 'flex', gap: '12px', marginTop: '20px' }}>
-              {['Instagram', 'TikTok', 'Pinterest'].map(s => (
-                <div key={s} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '0.65rem', letterSpacing: '0.05em', fontFamily: "'Jost', sans-serif", transition: 'background 0.2s' }}>
-                  {s[0]}
-                </div>
-              ))}
+              {[
+                { icon: FiInstagram, label: 'Instagram' },
+                { icon: FiTwitter, label: 'Twitter' },
+                { icon: FiFacebook, label: 'Facebook' },
+              ].map(s => {
+                const IconComponent = s.icon;
+                return (
+                  <div key={s.label} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '1rem', transition: 'all 0.2s', border: '1px solid rgba(255,255,255,0.2)' }} 
+                    onMouseEnter={e => { e.currentTarget.style.background = '#C9A87C'; e.currentTarget.style.borderColor = '#C9A87C'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; }}
+                  >
+                    <IconComponent color="white" size={18} />
+                  </div>
+                );
+              })}
             </div>
           </div>
           {[

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FiX, FiMinus, FiPlus, FiCheck } from 'react-icons/fi';
+import { FiCheckCircle } from 'react-icons/fi';
 
 export function ProductModal({ product, open, onClose, onAddToCart }) {
   const [selectedImg, setSelectedImg] = useState(0);
@@ -68,8 +70,10 @@ export function ProductModal({ product, open, onClose, onAddToCart }) {
             position: 'absolute', top: '20px', right: '20px',
             width: '36px', height: '36px', borderRadius: '50%',
             background: '#EDE3D5', border: 'none', cursor: 'pointer',
-            fontSize: '1rem', color: '#6B4F32', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>X</button>
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <FiX size={18} color="#6B4F32" />
+          </button>
 
           <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.7rem', color: '#A07850', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '8px' }}>
             {product.brand} · {product.size}
@@ -121,9 +125,13 @@ export function ProductModal({ product, open, onClose, onAddToCart }) {
           {/* Qty + Add */}
           <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '14px', border: '1.5px solid #EDE3D5', borderRadius: '50px', padding: '6px 16px' }}>
-              <button onClick={() => setQty(q => Math.max(1, q - 1))} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.2rem', color: '#6B4F32' }}>−</button>
+              <button onClick={() => setQty(q => Math.max(1, q - 1))} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6B4F32', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <FiMinus size={16} />
+              </button>
               <span style={{ fontFamily: "'Jost', sans-serif", fontWeight: 600, fontSize: '0.95rem', minWidth: '20px', textAlign: 'center' }}>{qty}</span>
-              <button onClick={() => setQty(q => q + 1)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.2rem', color: '#6B4F32' }}>+</button>
+              <button onClick={() => setQty(q => q + 1)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6B4F32', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <FiPlus size={16} />
+              </button>
             </div>
             <button onClick={handleAdd} style={{
               flex: 1, background: added ? '#8FA688' : '#6B4F32', color: 'white',
@@ -132,7 +140,7 @@ export function ProductModal({ product, open, onClose, onAddToCart }) {
               letterSpacing: '0.06em', cursor: 'pointer', transition: 'all 0.3s ease',
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
             }}>
-              {added ? '✓ Acheté !' : '+ Acheter'}
+              {added ? <><FiCheck size={16} /> Acheté !</> : <><FiPlus size={16} /> Acheter</>}
             </button>
           </div>
         </div>
@@ -159,10 +167,12 @@ export function SuccessPage({ order, onContinue }) {
           width: '80px', height: '80px', borderRadius: '50%',
           background: 'linear-gradient(135deg, #C9A87C, #6B4F32)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          margin: '0 auto 28px', fontSize: '2rem',
+          margin: '0 auto 28px',
           boxShadow: '0 12px 32px rgba(107,79,50,0.3)',
           animation: 'pulse 2s ease infinite',
-        }}>✓</div>
+        }}>
+          <FiCheckCircle size={40} color="white" />
+        </div>
 
         <div style={{ background: '#FAF6F0', borderRadius: '16px', padding: '20px', marginBottom: '32px', textAlign: 'left' }}>
           {[['Préparation', '1-2 jours ouvrables'], ['Livraison', '2-5 jours ouvrables'], ['Suivi', 'par appel']].map(([label, val]) => (

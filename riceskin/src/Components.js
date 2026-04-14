@@ -1,4 +1,5 @@
 import React from 'react';
+import { FiCheck, FiPlus } from 'react-icons/fi';
 
 const ITEMS = ["Rice Extract 77%", "Niacinamide", "Ceramides", "Fermented Rice Water", "Hyaluronic Acid", "Squalane", "Rice Bran", "Glass Skin"];
 
@@ -154,9 +155,9 @@ export function ProductCard({ product, onAddToCart, onViewProduct }) {
             onMouseLeave={e => { if (!added) e.currentTarget.style.background = '#6B4F32'; }}
           >
             {added ? (
-              <><svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Acheté !</>
+              <><FiCheck size={14} /> Acheté !</>
             ) : (
-              <><svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> Acheter</>
+              <><FiPlus size={14} /> Acheter</>
             )}
           </button>
         </div>
