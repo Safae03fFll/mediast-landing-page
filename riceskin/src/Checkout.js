@@ -62,7 +62,7 @@ export default function Checkout({ cart, onBack, onSuccess }) {
   });
 
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const shipping = total >= 60 ? 0 : 5.99;
+  const shipping = total >= 600 ? 0 : 59.9;
   const grandTotal = total + shipping;
 
   const update = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
@@ -421,7 +421,7 @@ export default function Checkout({ cart, onBack, onSuccess }) {
                 { icon: <FiLock size={14} />, text: 'Paiement 100% sécurisé' },
                 { icon: <FiTruck size={14} />, text: 'Livraison rapide 2-5 jours' },
                 { icon: <FiRefreshCw size={14} />, text: 'Retours gratuits 30 jours' },
-                { icon: <FiLeaf size={14} />, text: 'Formules 100% naturelles' },
+                { icon: <FiFeather size={14} />, text: 'Formules 100% naturelles' },
               ].map(({ icon, text }) => (
                 <div key={text} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontFamily: "'Jost', sans-serif", fontSize: '0.78rem', color: '#8C7B6A' }}>
                   <span style={{ color: '#6B4F32', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>{icon}</span>
