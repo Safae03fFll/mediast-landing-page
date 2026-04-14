@@ -118,7 +118,7 @@ export default function CartDrawer({ cart, open, onClose, onUpdateQty, onRemove,
                   </div>
 
                   <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.1rem', fontWeight: 500, color: '#2A1F14' }}>
-                    {(item.price * item.qty).toFixed(2)}€
+                    {(item.price * item.qty).toFixed(2)} MAD
                   </span>
                 </div>
 
@@ -148,7 +148,7 @@ export default function CartDrawer({ cart, open, onClose, onUpdateQty, onRemove,
                 marginBottom: '16px', fontFamily: "'Jost', sans-serif", fontSize: '0.8rem', color: '#6B4F32',
                 textAlign: 'center',
               }}>
-                Plus que <strong>{(60 - total).toFixed(2)}€</strong> pour la livraison gratuite
+                Plus que <strong>{(60 - total).toFixed(2)} MAD</strong> pour la livraison gratuite
               </div>
             )}
             {total >= 60 && (
@@ -164,7 +164,7 @@ export default function CartDrawer({ cart, open, onClose, onUpdateQty, onRemove,
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '18px' }}>
               <span style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.8rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8C7B6A' }}>Total</span>
               <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '2rem', fontWeight: 400, color: '#2A1F14' }}>
-                {total.toFixed(2)}€
+                {total.toFixed(2)} MAD
               </span>
             </div>
 

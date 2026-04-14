@@ -132,8 +132,8 @@ function saveOrder(data) {
 function setupHeaders(sheet) {
   const headers = [
     "N° Commande", "Date", "Client", "Email", "Téléphone",
-    "Adresse", "Produits", "Sous-total (€)", "Livraison (€)",
-    "Total (€)", "Paiement", "Notes", "Statut"
+    "Adresse", "Produits", "Sous-total (MAD)", "Livraison (MAD)",
+    "Total (MAD)", "Paiement", "Notes", "Statut"
   ];
   
   sheet.appendRow(headers);
@@ -199,7 +199,7 @@ function formatOrderRow(sheet, rowNum) {
 function sendNotificationEmail(data) {
   const ADMIN_EMAIL = "votre@email.com";
   
-  const subject = `🛒 Nouvelle commande #${data.orderNumber} - ${data.total}€`;
+  const subject = `🛒 Nouvelle commande #${data.orderNumber} - ${data.total} MAD`;
   const body = `
     Nouvelle commande reçue !
     
@@ -211,9 +211,9 @@ function sendNotificationEmail(data) {
     
     Produits: ${data.items}
     
-    Sous-total: ${data.subtotal}€
-    Livraison: ${data.shipping}€
-    Total: ${data.total}€
+    Sous-total: ${data.subtotal} MAD
+    Livraison: ${data.shipping} MAD
+    Total: ${data.total} MAD
     
     Paiement: ${data.payment}
     Notes: ${data.notes}
@@ -268,7 +268,7 @@ function showStats() {
   SpreadsheetApp.getUi().alert(
     `📊 Statistiques\n\n` +
     `Nombre de commandes : ${lastRow - 1}\n` +
-    `Chiffre d'affaires total : ${totalRevenue.toFixed(2)}€\n` +
-    `Panier moyen : ${(totalRevenue / (lastRow - 1)).toFixed(2)}€`
+    `Chiffre d'affaires total : ${totalRevenue.toFixed(2)} MAD\n` +
+    `Panier moyen : ${(totalRevenue / (lastRow - 1)).toFixed(2)} MAD`
   );
 }

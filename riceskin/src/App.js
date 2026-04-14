@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import './index.css';
+import { FiTruck } from 'react-icons/fi';
 import { PRODUCTS, IMAGES } from './data';
 import Navbar from './Navbar';
 import Hero from './Hero';
@@ -229,8 +230,9 @@ export default function App() {
           <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.72rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: '#A07850', fontWeight: 600, marginBottom: '16px' }}>
             Offre limitée
           </p>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2rem, 4vw, 3.2rem)', fontWeight: 400, color: '#2A1F14', marginBottom: '14px' }}>
-            Livraison gratuite dès <em style={{ color: '#6B4F32', fontStyle: 'italic' }}>60€</em>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2rem, 4vw, 3.2rem)', fontWeight: 400, color: '#2A1F14', marginBottom: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
+            <FiTruck size={22} style={{ color: '#6B4F32' }} />
+            Livraison gratuite dès <em style={{ color: '#6B4F32', fontStyle: 'italic' }}>60 MAD</em>
           </h2>
           <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.95rem', color: '#6B5A48', marginBottom: '36px' }}>
             Commandez les deux produits et économisez sur la livraison
@@ -238,13 +240,14 @@ export default function App() {
           <button onClick={() => productsRef.current?.scrollIntoView({ behavior: 'smooth' })} style={{
             background: '#6B4F32', color: 'white', border: 'none',
             padding: '18px 48px', borderRadius: '50px', cursor: 'pointer',
+            display: 'inline-flex', alignItems: 'center', gap: '10px',
             fontFamily: "'Jost', sans-serif", fontSize: '0.9rem', fontWeight: 600,
             letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'all 0.3s ease',
           }}
             onMouseEnter={e => { e.currentTarget.style.background = '#2A1F14'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(42,31,20,0.2)'; }}
             onMouseLeave={e => { e.currentTarget.style.background = '#6B4F32'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
           >
-            Commander maintenant
+            <FiTruck size={16} /> Commander maintenant
           </button>
         </section>
 

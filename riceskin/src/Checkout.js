@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FiLock, FiTruck, FiRefreshCw, FiFeather } from 'react-icons/fi';
 import { GOOGLE_SHEET_URL } from './data';
 
 const inputStyle = {
@@ -87,7 +88,7 @@ export default function Checkout({ cart, onBack, onSuccess }) {
       customer: `${form.firstName} ${form.lastName}`,
       phone: form.phone,
       city: form.city,
-      items: cart.map(i => `${i.name} x${i.qty} (${(i.price * i.qty).toFixed(2)}€)`).join(' | '),
+      items: cart.map(i => `${i.name} x${i.qty} (${(i.price * i.qty).toFixed(2)} MAD)`).join(' | '),
       subtotal: total.toFixed(2),
       shipping: shipping.toFixed(2),
       total: grandTotal.toFixed(2),
@@ -364,7 +365,7 @@ export default function Checkout({ cart, onBack, onSuccess }) {
             }}>
               {loading ? (
                 <><div style={{ width: '18px', height: '18px', border: '2px solid rgba(255,255,255,0.3)', borderTopColor: 'white', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} /> Traitement...</>
-              ) : step === 1 ? 'Continuer vers le paiement →' : `Confirmer · ${grandTotal.toFixed(2)}€`}
+              ) : step === 1 ? 'Continuer vers le paiement →' : `Confirmer · ${grandTotal.toFixed(2)} MAD`}
             </button>
           </div>
         </form>
@@ -398,26 +399,32 @@ export default function Checkout({ cart, onBack, onSuccess }) {
                     <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.72rem', color: '#8C7B6A' }}>{item.size}</p>
                   </div>
                 </div>
-                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '1rem', fontWeight: 500 }}>{(item.price * item.qty).toFixed(2)}€</span>
+                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '1rem', fontWeight: 500 }}>{(item.price * item.qty).toFixed(2)} MAD</span>
               </div>
             ))}
 
             <div style={{ marginTop: '16px' }}>
-              {[['Sous-total', `${total.toFixed(2)}€`], ['Livraison', shipping === 0 ? 'Gratuite' : `${shipping.toFixed(2)}€`]].map(([k, v]) => (
+              {[['Sous-total', `${total.toFixed(2)} MAD`], ['Livraison', shipping === 0 ? 'Gratuite' : `${shipping.toFixed(2)} MAD`]].map(([k, v]) => (
                 <div key={k} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', fontFamily: "'Jost', sans-serif", fontSize: '0.85rem', color: '#8C7B6A' }}>
                   <span>{k}</span><span style={{ color: shipping === 0 && k === 'Livraison' ? '#8FA688' : '#6B4F32' }}>{v}</span>
                 </div>
               ))}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', paddingTop: '14px', marginTop: '6px', borderTop: '2px solid #EDE3D5' }}>
                 <span style={{ fontFamily: "'Jost', sans-serif", fontWeight: 600, fontSize: '0.85rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Total</span>
-                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.8rem', fontWeight: 400, color: '#6B4F32' }}>{grandTotal.toFixed(2)}€</span>
+                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.8rem', fontWeight: 400, color: '#6B4F32' }}>{grandTotal.toFixed(2)} MAD</span>
               </div>
             </div>
 
             {/* Trust */}
             <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {['Paiement 100% sécurisé', 'Livraison rapide 2-5 jours', 'Retours gratuits 30 jours', 'Formules 100% naturelles'].map((text) => (
-                <div key={text} style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.78rem', color: '#8C7B6A' }}>
+              {[
+                { icon: <FiLock size={14} />, text: 'Paiement 100% sécurisé' },
+                { icon: <FiTruck size={14} />, text: 'Livraison rapide 2-5 jours' },
+                { icon: <FiRefreshCw size={14} />, text: 'Retours gratuits 30 jours' },
+                { icon: <FiLeaf size={14} />, text: 'Formules 100% naturelles' },
+              ].map(({ icon, text }) => (
+                <div key={text} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontFamily: "'Jost', sans-serif", fontSize: '0.78rem', color: '#8C7B6A' }}>
+                  <span style={{ color: '#6B4F32', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>{icon}</span>
                   {text}
                 </div>
               ))}

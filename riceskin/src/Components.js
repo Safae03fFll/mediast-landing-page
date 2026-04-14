@@ -1,7 +1,22 @@
 import React from 'react';
 import { FiCheck, FiPlus } from 'react-icons/fi';
+import { MdWbSunny, MdZoomIn, MdStar, MdRiceBowl, MdOpacity, MdShield, MdTimerOff, MdSchedule } from 'react-icons/md';
 
 const ITEMS = ["Rice Extract 77%", "Niacinamide", "Ceramides", "Fermented Rice Water", "Hyaluronic Acid", "Squalane", "Rice Bran", "Glass Skin"];
+
+const getBenefitIcon = (benefit) => {
+  const iconMap = {
+    "Brightening": <MdWbSunny size={12} />,
+    "Pore Refining": <MdZoomIn size={12} />,
+    "Glass-Skin Glow": <MdStar size={12} />,
+    "Fermented Rice": <MdRiceBowl size={12} />,
+    "Deep Hydration": <MdOpacity size={12} />,
+    "Barrier Repair": <MdShield size={12} />,
+    "Anti-Aging": <MdTimerOff size={12} />,
+    "72h Moisture": <MdSchedule size={12} />,
+  };
+  return iconMap[benefit] || null;
+};
 
 export function MarqueeStrip() {
   return (
@@ -46,6 +61,7 @@ export function ProductCard({ product, onAddToCart, onViewProduct }) {
         transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         transform: hovered ? 'translateY(-8px)' : 'translateY(0)',
         cursor: 'pointer', position: 'relative',
+        display: 'flex', flexDirection: 'column', height: '100%'
       }}
       onMouseEnter={() => { setHovered(true); setImgIdx(1); }}
       onMouseLeave={() => { setHovered(false); setImgIdx(0); }}
@@ -104,7 +120,7 @@ export function ProductCard({ product, onAddToCart, onViewProduct }) {
       </div>
 
       {/* Info */}
-      <div style={{ padding: '26px 28px 28px' }}>
+      <div style={{ padding: '26px 28px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: 1 }}>
         <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.7rem', color: '#A07850', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '6px' }}>
           {product.brand} · {product.size}
         </p>
@@ -123,7 +139,9 @@ export function ProductCard({ product, onAddToCart, onViewProduct }) {
               borderRadius: '20px', padding: '4px 12px',
               fontFamily: "'Jost', sans-serif", fontSize: '0.7rem',
               color: '#6B4F32', fontWeight: 500, letterSpacing: '0.04em',
+              display: 'flex', alignItems: 'center', gap: '4px',
             }}>
+              {getBenefitIcon(b)}
               {b}
             </span>
           ))}
@@ -132,12 +150,12 @@ export function ProductCard({ product, onAddToCart, onViewProduct }) {
         {/* Price + CTA */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
-            <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.8rem', fontWeight: 500, color: '#2A1F14' }}>
-              {product.price.toFixed(2)}€
+              <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.8rem', fontWeight: 500, color: '#2A1F14' }}>
+              {product.price.toFixed(2)} MAD
             </span>
             {product.originalPrice && (
               <span style={{ fontFamily: "'Jost', sans-serif", fontSize: '0.9rem', color: '#B0A090', textDecoration: 'line-through', marginLeft: '8px' }}>
-                {product.originalPrice.toFixed(2)}€
+                {product.originalPrice.toFixed(2)} MAD
               </span>
             )}
           </div>

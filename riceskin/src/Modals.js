@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { FiX, FiMinus, FiPlus, FiCheck } from 'react-icons/fi';
-import { FiCheckCircle } from 'react-icons/fi';
+import { FiX, FiMinus, FiPlus, FiCheck, FiCheckCircle, FiClock, FiTruck, FiPhone } from 'react-icons/fi';
 
 export function ProductModal({ product, open, onClose, onAddToCart }) {
   const [selectedImg, setSelectedImg] = useState(0);
@@ -87,8 +86,8 @@ export function ProductModal({ product, open, onClose, onAddToCart }) {
 
           {/* Price */}
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', marginBottom: '24px' }}>
-            <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '2rem', fontWeight: 500, color: '#2A1F14' }}>{product.price.toFixed(2)}€</span>
-            {product.originalPrice && <span style={{ fontFamily: "'Jost', sans-serif", fontSize: '1rem', color: '#B0A090', textDecoration: 'line-through' }}>{product.originalPrice.toFixed(2)}€</span>}
+            <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '2rem', fontWeight: 500, color: '#2A1F14' }}>{product.price.toFixed(2)} MAD</span>
+            {product.originalPrice && <span style={{ fontFamily: "'Jost', sans-serif", fontSize: '1rem', color: '#B0A090', textDecoration: 'line-through' }}>{product.originalPrice.toFixed(2)} MAD</span>}
           </div>
 
           {/* Tabs */}
@@ -175,10 +174,17 @@ export function SuccessPage({ order, onContinue }) {
         </div>
 
         <div style={{ background: '#FAF6F0', borderRadius: '16px', padding: '20px', marginBottom: '32px', textAlign: 'left' }}>
-          {[['Préparation', '1-2 jours ouvrables'], ['Livraison', '2-5 jours ouvrables'], ['Suivi', 'par appel']].map(([label, val]) => (
-            <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', fontFamily: "'Jost', sans-serif", fontSize: '0.83rem' }}>
-              <span style={{ color: '#6B5A48' }}>{label}</span>
-              <span style={{ color: '#6B4F32', fontWeight: 500 }}>{val}</span>
+          {[
+            { label: 'Préparation', value: '1-2 jours ouvrables', icon: <FiClock size={16} /> },
+            { label: 'Livraison', value: '2-5 jours ouvrables', icon: <FiTruck size={16} /> },
+            { label: 'Suivi', value: 'par appel', icon: <FiPhone size={16} /> },
+          ].map(({ label, value, icon }) => (
+            <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10px', padding: '10px 0', fontFamily: "'Jost', sans-serif", fontSize: '0.83rem' }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#6B5A48' }}>
+                <span style={{ color: '#6B4F32', display: 'inline-flex' }}>{icon}</span>
+                {label}
+              </span>
+              <span style={{ color: '#6B4F32', fontWeight: 500 }}>{value}</span>
             </div>
           ))}
         </div>
